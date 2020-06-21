@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="com.bun.dao.ItDoctorDao">
+    <select id="findAll" resultType="doctor">
+        select * from doctor
+    </select>
+    <select id="findByCon" resultType="doctor" parameterType="doctor">
+        select * from doctor
+        <where>
+            <if test="doctor!=null">
+                  doctor = #{doctor}
+            </if>
+            <if test="pay1!=null">
+               and pay1 = #{pay1}
+            </if>
+        </where>
+    </select><select id="findByConIn" resultType="doctor" parameterType="doctor">
+        select * from doctor
+        <where>
+            <if test="doctor!=null">
+                  doctor = #{doctor}
+            </if>
+            <if test="pay1!=null">
+               and pay1 = #{pay1}
+            </if>
+        </where>
+    </select>
+
+
+
+
+    <insert id="addDoc" parameterType="com.bun.bean.Doctor" useGeneratedKeys="true" keyProperty="id_d">
+        insert into doctor(doctor,CD,pay1,workday,password) value(#{doctor},#{CD},#{pay1},#{workday},#{password})
+    </insert>
+    <update id="updateDoc" parameterType="com.bun.bean.Doctor">
+        update doctor set doctor=#{value1},CD=#{value2} where id_d=#{value3}
+    </update>
+    <delete id="deleteDoc" parameterType="String">
+        delete from doctor where id_d=#{value}
+    </delete>
+</mapper>
